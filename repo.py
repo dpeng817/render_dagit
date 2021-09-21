@@ -1,6 +1,6 @@
 from dagster import op, graph, repository, ScheduleDefinition
 
-basic_schedule = ScheduleDefinition(cron_schedule="*/20 * * * *", pipeline_name="basic")
+basic_schedule = ScheduleDefinition(cron_schedule="*/5 * * * *", pipeline_name="basic")
 
 
 @op
