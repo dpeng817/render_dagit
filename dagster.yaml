@@ -6,18 +6,6 @@ run_coordinator:
   module: dagster.core.run_coordinator
   class: QueuedRunCoordinator
 
-run_launcher:
-  module: dagster_docker
-  class: DockerRunLauncher
-  config:
-    env_vars:
-      - DAGSTER_POSTGRES_USER
-      - DAGSTER_POSTGRES_PASSWORD
-      - DAGSTER_POSTGRES_DB
-    network: docker_example_network
-    container_kwargs:
-      auto_remove: true
-
 run_storage:
   module: dagster_postgres.run_storage
   class: PostgresRunStorage
