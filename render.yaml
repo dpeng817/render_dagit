@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: dagit
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "dagit -f repo.py -p 80 -h 0.0.0.0"
+    envVars:
+      fromGroup: dagster_env_vars
+  - type: worker
+    name: daemon
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "dagster-daemon run"
+    envVars:
+      fromGroup: dagster_env_vars
+databases:
+  - name: dagster_db
+envVarGroups:
+  - name: dagster_env_vars
+    envVars:
+      - key: DAGSTER_HOME
+        value: /opt/render/project/src
+      - key: DAGSTER_POSTGRES_DB
+        fromDatabase:
+          name: dagster_db
+          property: database
+      - key: DAGSTER_POSTGRES_HOSTNAME
+        fromDatabase:
+          name: dagster_db
+          property: host
+      - key: DAGSTER_POSTGRES_PASSWORD
+        fromDatabase:
+          name: dagster_db
+          property: password
+      - key: DAGSTER_POSTGRES_USER
+        fromDatabase:
+          name: dagster_db
+          property: user
+      - key: PORT
+        value: 80
