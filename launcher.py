@@ -35,7 +35,6 @@ class RenderRunLauncher(RunLauncher, ConfigurableClass):
         self._render_api_token = render_api_token
         self._render_service_id = render_service_id
         self._inst_data = inst_data
-        self._
 
         super().__init__()
 
